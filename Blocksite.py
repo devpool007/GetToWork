@@ -2,30 +2,22 @@ import time
 import os
 from datetime import datetime as dt
 
-#class OS(Enum):
-#    def checkPlatform(osName):
-#        return osName.lower()== platform.system().lower()
-#
-#    MAC = checkPlatform("darwin")
-#    LINUX = checkPlatform("linux")
-#    WINDOWS = checkPlatform("windows")
-#
-#if OS.MAC or OS.LINUX:
-if os.name == 'mac':
-    hosts_file=("/private/etc/hosts")
+if os.name == 'posix':
+    hosts_file=("/private/etc/hosts") # on an ubuntu platform it can be found here
+    # hosts_file=("hostslist") # for testing purposes
 elif os.name == 'nt':
     hosts_file=r"C:\Windows\System32\Drivers\etc\hosts"
-
-#elif OS.WINDOWS:
-#    hosts_file=r"C:\Windows\System32\Drivers\etc\hosts"
 
 
 
 local="127.0.0.1"
-website_list=["www.facebook.com"]
+website_list=[] # empty is better
 
-stime=9
-etime=17
+
+
+stime = dt.now().hour
+k = 1
+etime = stime + k
 
 def start():
  global website_list
@@ -51,5 +43,11 @@ def start():
     break
     time.sleep(720)
 
-
-
+def remover(value):  # added for instant removal of site from the list
+    with open(hosts_file,'r+') as file:
+        content=file.readlines()
+        file.seek(0)
+        for line in content:
+            if value not in line:
+                file.write(line)
+        file.truncate()
