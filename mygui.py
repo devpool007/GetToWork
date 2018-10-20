@@ -38,6 +38,7 @@ def view():
         print('\033[91m'+sites+'\033[0m')
 def starting():
     Blocksite.start() # suggesting thread implementation so that last add/remove does not affect the current add/remove function
+    window.after(5000, lambda: window.iconify()) # Destroy the widget after 5 seconds
 
 window = tkinter.Tk()
 window.configure(background="#a1dbcd")
