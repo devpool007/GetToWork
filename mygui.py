@@ -1,5 +1,4 @@
 import tkinter
-from datetime import datetime as dt
 from tkinter import *
 import Blocksite
 
@@ -7,37 +6,23 @@ import Blocksite
 
 def onadd():
     u=(str(e1.get()))
-    # z=(str(e3.get()))
+    Blocksite.website_list.append(u)
+    z=(str(e3.get()))
+    c = int(z)
+    Blocksite.stime=c
+
     y=(str(e2.get()))
-    # c=0
-    d=0
-    try:
-        # c = int(z)
-        d = int(y)
-    except Exception as e:
-        print("Please Enter The times correctly")
-    # Blocksite.stime=c
-    Blocksite.k = d
-    if Blocksite.stime < Blocksite.etime: # only add if endtime is > current time
-        if u not in Blocksite.website_list: # do not add more than once to the list
-            Blocksite.website_list.append(u)
-        else:
-            print("Already There")
-    else:
-        print("Bad End Time")
+    d = int(y)
+    Blocksite.etime=d
 def onremove():
     v=str(e1.get())
-    try:                # only removing if there is a value
-        Blocksite.website_list.remove(v)
-        Blocksite.remover(v)
-    except Exception as e:
-        print("Not In Blocklist")
+    Blocksite.website_list.remove(v)
 def view():
-    print("Sites being Blocked:") # better view method
-    for sites in Blocksite.website_list:
-        print('\033[91m'+sites+'\033[0m')
+    print(Blocksite.website_list)
+    print(Blocksite.stime)
+    print(Blocksite.etime)
 def starting():
-    Blocksite.start() # suggesting thread implementation so that last add/remove does not affect the current add/remove function
+    Blocksite.start()
 
 window = tkinter.Tk()
 window.configure(background="#a1dbcd")
@@ -45,7 +30,7 @@ window.configure(background="#a1dbcd")
 window.title("WebsiteBlocker")
 
 
-photo = tkinter.PhotoImage(file="hqdefault.PPM")
+photo = tkinter.PhotoImage(file="hqdefault.ppm")
 w = tkinter.Label(window, image=photo)
 w.pack()
 
@@ -60,18 +45,16 @@ e1 = tkinter.Entry(window)
 l1.pack()
 e1.pack()
 
-# l3 = tkinter.Label(window, text="Start Time:", fg="#383a39", bg="#a1dbcd")
-# e3 = tkinter.Entry(window)
-# l3.pack()
-# e3.pack()
+l3 = tkinter.Label(window, text="Start Time:", fg="#383a39", bg="#a1dbcd")
+e3 = tkinter.Entry(window)
+l3.pack()
+e3.pack()
 
-l2 = tkinter.Label(window, text="No. of hours:", fg="#383a39", bg="#a1dbcd")
+l2 = tkinter.Label(window, text="End Time:", fg="#383a39", bg="#a1dbcd")
 e2 = tkinter.Entry(window)
 l2.pack()
 e2.pack()
 
-li = tkinter.Label(window, text="           ", fg="#383a39", bg="#a1dbcd")
-li.pack()
 
 btn = tkinter.Button(window, text="Add", fg="#a1dbcd", bg="#383a39",command=onadd)
 btn.config( height = 1, width = 12 )
