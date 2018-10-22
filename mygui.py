@@ -37,8 +37,8 @@ def view():
     for sites in Blocksite.website_list:
         print('\033[91m'+sites+'\033[0m')
 def starting():
-    Blocksite.start() # suggesting thread implementation so that last add/remove does not affect the current add/remove function
-     window.after(5000, lambda: window.iconify()) # Minimise the window after 5 seconds
+    Blocksite.start() 
+    window.after(5000, lambda: window.iconify()) # Minimise the window after 5 seconds
     
 
 window = tkinter.Tk()
